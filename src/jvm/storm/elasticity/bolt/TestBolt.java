@@ -17,7 +17,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 
-public static class TestBolt extends BaseRichBolt{
+public class TestBolt extends BaseRichBolt{
 	OutputCollector _collector;
 
     @Override
