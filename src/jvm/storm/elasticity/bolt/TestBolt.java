@@ -2,7 +2,6 @@ package storm.elasticity.bolt;
 
 import java.util.Map;
 
-import storm.elasticity.LocalCluster;
 import storm.elasticity.ExclamationTopology.ExclamationBolt;
 import backtype.storm.Config;
 import backtype.storm.StormSubmitter;
