@@ -11,7 +11,7 @@ public class StarTopology {
 	public static void main(String[] args) throws Exception {
 		int numSpout = 5;
 		int numBolt = 5;
-		int paralellism = 5;
+		int paralellism = 2;
 
 		TopologyBuilder builder = new TopologyBuilder();
 
