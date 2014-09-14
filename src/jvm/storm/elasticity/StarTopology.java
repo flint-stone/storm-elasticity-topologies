@@ -11,7 +11,7 @@ public class StarTopology {
 	public static void main(String[] args) throws Exception {
 		int numSpout = 5;
 		int numBolt = 5;
-		int paralellism = 2;
+		int paralellism = 1;
 
 		TopologyBuilder builder = new TopologyBuilder();
 
@@ -30,7 +30,7 @@ public class StarTopology {
 		Config conf = new Config();
 		conf.setDebug(true);
 
-		conf.setNumWorkers(3);
+		conf.setNumWorkers(4);
 
 		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
 				builder.createTopology());
