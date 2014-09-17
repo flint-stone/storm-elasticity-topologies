@@ -30,7 +30,7 @@ public class StarTopology {
 		Config conf = new Config();
 		conf.setDebug(true);
 
-		conf.setNumWorkers(4);
+		conf.setNumWorkers(6);
 
 		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
 				builder.createTopology());
