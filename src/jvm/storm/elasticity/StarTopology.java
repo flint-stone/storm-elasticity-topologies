@@ -24,7 +24,7 @@ public class StarTopology {
 		}
 
 		for (int i = 0; i < numBolt; i++) {
-			builder.setBolt("bolt_" + i, new TestBolt(), paralellism)
+			builder.setBolt("bolt_output_" + i, new TestBolt(), paralellism)
 					.shuffleGrouping("center");
 		}
 		Config conf = new Config();
