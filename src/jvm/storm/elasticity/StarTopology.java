@@ -27,10 +27,16 @@ public class StarTopology {
 			builder.setBolt("bolt_output_" + i, new TestBolt(), paralellism)
 					.shuffleGrouping("center");
 		}
+		
+		
 		Config conf = new Config();
 		conf.setDebug(true);
+		
+		conf.setNumAckers(0);
 
-		conf.setNumWorkers(100);
+		conf.setNumWorkers(20);
+		
+	
 
 		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
 				builder.createTopology());
