@@ -9,14 +9,14 @@ import backtype.storm.topology.TopologyBuilder;
 
 public class StarTopology {
 	public static void main(String[] args) throws Exception {
-		int numSpout = 2;
-		int numBolt = 2;
-		int paralellism = 2;
+		int numSpout = 5;
+		int numBolt = 5;
+		int paralellism = 3;
 
 		TopologyBuilder builder = new TopologyBuilder();
 
 		BoltDeclarer center = builder.setBolt("center", new TestBolt(),
-				paralellism*2);
+				paralellism);
 
 		for (int i = 0; i < numSpout; i++) {
 			builder.setSpout("spout_" + i, new TestSpout(), paralellism);
