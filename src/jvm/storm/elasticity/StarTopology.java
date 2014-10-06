@@ -9,9 +9,9 @@ import backtype.storm.topology.TopologyBuilder;
 
 public class StarTopology {
 	public static void main(String[] args) throws Exception {
-		int numSpout = 5;
-		int numBolt = 5;
-		int paralellism = 3;
+		int numSpout = 2;
+		int numBolt = 2;
+		int paralellism = 2;
 
 		TopologyBuilder builder = new TopologyBuilder();
 
