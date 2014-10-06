@@ -34,7 +34,7 @@ public class StarTopology {
 		
 		//conf.setNumAckers(0);
 
-		conf.setNumWorkers(6);
+		conf.setNumWorkers(8);
 		
 	
 
