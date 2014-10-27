@@ -18,8 +18,10 @@ public class DiamondTopology {
 		builder.setBolt("bolt_1", new TestBolt(), paralellism).shuffleGrouping("spout_head");
 		builder.setBolt("bolt_2", new TestBolt(), paralellism).shuffleGrouping("spout_head");
 		
-		builder.setBolt("bolt_output_3", new TestBolt(), paralellism).shuffleGrouping("bolt_1");
-		builder.setBolt("bolt_output_3", new TestBolt(), paralellism).shuffleGrouping("bolt_2");
+		BoltDeclarer output = builder.setBolt("bolt_output_3", new TestBolt(), paralellism);
+		output.shuffleGrouping("bolt_1");
+		output.shuffleGrouping("bolt_2");
+		
 
 		Config conf = new Config();
 		conf.setDebug(true);
