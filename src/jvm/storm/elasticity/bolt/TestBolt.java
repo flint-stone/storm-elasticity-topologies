@@ -2,7 +2,6 @@ package storm.elasticity.bolt;
 
 import java.util.Map;
 
-import storm.elasticity.LocalCluster;
 import storm.elasticity.ExclamationTopology.ExclamationBolt;
 import backtype.storm.Config;
 import backtype.storm.StormSubmitter;
@@ -17,7 +16,7 @@ import backtype.storm.tuple.Tuple;
 import backtype.storm.tuple.Values;
 import backtype.storm.utils.Utils;
 
-public static class TestBolt extends BaseRichBolt{
+public class TestBolt extends BaseRichBolt{
 	OutputCollector _collector;
 
     @Override
@@ -27,7 +26,7 @@ public static class TestBolt extends BaseRichBolt{
     @Override
     public void execute(Tuple tuple) {
       _collector.emit(tuple, new Values(tuple.getString(0)));
-      //_collector.ack(tuple);
+      _collector.ack(tuple);
     }
 
     @Override
