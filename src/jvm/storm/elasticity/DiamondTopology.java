@@ -9,29 +9,32 @@ import backtype.storm.topology.TopologyBuilder;
 
 public class DiamondTopology {
 	public static void main(String[] args) throws Exception {
-		int paralellism = 4;
+		int paralellism = 2;
 
-		TopologyBuilder builder = new TopologyBuilder();
+        TopologyBuilder builder = new TopologyBuilder();
 
-		builder.setSpout("spout_head", new TestSpout(), paralellism);
+        builder.setSpout("spout_head", new TestSpout(), paralellism);
 
-		builder.setBolt("bolt_1", new TestBolt(), paralellism).shuffleGrouping("spout_head");
-		builder.setBolt("bolt_2", new TestBolt(), paralellism).shuffleGrouping("spout_head");
-		
-		BoltDeclarer output = builder.setBolt("bolt_output_3", new TestBolt(), paralellism);
-		output.shuffleGrouping("bolt_1");
-		output.shuffleGrouping("bolt_2");
-		
+        builder.setBolt("bolt_1", new TestBolt(), paralellism).shuffleGrouping("spout_head");
+        builder.setBolt("bolt_2", new TestBolt(), paralellism).shuffleGrouping("spout_head");
+        builder.setBolt("bolt_3", new TestBolt(), paralellism).shuffleGrouping("spout_head");
+        builder.setBolt("bolt_4", new TestBolt(), paralellism).shuffleGrouping("spout_head");
 
-		Config conf = new Config();
-		conf.setDebug(true);
+        BoltDeclarer output = builder.setBolt("bolt_output_3", new TestBolt(), paralellism);
+        output.shuffleGrouping("bolt_1");
+        output.shuffleGrouping("bolt_2");
+        output.shuffleGrouping("bolt_3");
+        output.shuffleGrouping("bolt_4");
 
-		// conf.setNumAckers(0);
+        Config conf = new Config();
+        conf.setDebug(true);
 
-		conf.setNumWorkers(12);
+        // conf.setNumAckers(0);
 
-		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
-				builder.createTopology());
+        conf.setNumWorkers(12);
+
+        StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
+                        builder.createTopology());
 
 	}
 
