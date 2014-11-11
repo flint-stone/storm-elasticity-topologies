@@ -36,7 +36,7 @@ public class LinearTopology {
 		Config conf = new Config();
 		conf.setDebug(true);
 
-		// conf.setNumAckers(0);
+		conf.setNumAckers(0);
 
 		conf.setNumWorkers(12);
 
