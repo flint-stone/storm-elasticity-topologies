@@ -27,7 +27,7 @@ public class TransformBolt extends BaseRichBolt{
     public void execute(Tuple tuple) {
     	String word = tuple.getString(0);
     	Integer length=word.length();
-    	Thread.sleep(length);
+    	Utils.sleep(length);
     	word=word.substring(0,(int)(0.8*word.length()));
       _collector.emit(tuple, new Values(word));
       //_collector.ack(tuple);
