@@ -32,7 +32,8 @@ public class AggregationBolt extends BaseRichBolt{
     		x++;
     	}
     	byte b=0x10;
-    	word=word+Byte.toString(b)+Byte.toString(b)+Byte.toString(b)+Byte.toString(b);
+    	//word=word+Byte.toString(b)+Byte.toString(b)+Byte.toString(b)+Byte.toString(b);
+    	word=word+"word";
     	//word+=Byte.toString(b);
     	//word+=Byte.toString(b);
     	//word+=Byte.toString(b);
