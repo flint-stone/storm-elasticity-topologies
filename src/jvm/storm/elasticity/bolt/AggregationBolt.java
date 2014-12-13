@@ -28,7 +28,7 @@ public class AggregationBolt extends BaseRichBolt{
     	String word = tuple.getString(0);
     	Integer length=word.length();
     	int x=0;
-    	for(int i=0;i<length;i++){
+    	for(int i=0;i<10*length;i++){
     		x++;
     	}
     	byte b=0x10;

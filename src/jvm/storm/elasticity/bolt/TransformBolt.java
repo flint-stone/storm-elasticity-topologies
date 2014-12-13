@@ -29,7 +29,7 @@ public class TransformBolt extends BaseRichBolt{
     	Integer length=word.length();
     	//Utils.sleep(length);
     	int x=0;
-    	for(int i=0;i<length;i++){
+    	for(int i=0;i<10*length;i++){
     		x++;
     	}
     	word=word.substring(0,(int)(0.8*word.length()));
