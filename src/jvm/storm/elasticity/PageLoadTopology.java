@@ -12,7 +12,7 @@ import backtype.storm.topology.TopologyBuilder;
 public class PageLoadTopology {
 	public static void main(String[] args) throws Exception {
 		//int numBolt = 3;
-		int paralellism = 4;
+		int paralellism = 2;
 
 		TopologyBuilder builder = new TopologyBuilder();
 
@@ -31,7 +31,7 @@ public class PageLoadTopology {
 
 		conf.setNumAckers(0);
 
-		conf.setNumWorkers(28);
+		conf.setNumWorkers(36);
 
 		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
 				builder.createTopology());
