@@ -18,7 +18,6 @@
 package storm.elasticity;
 
 import backtype.storm.Config;
-import backtype.storm.LocalCluster;
 import backtype.storm.StormSubmitter;
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
@@ -33,55 +32,30 @@ import backtype.storm.utils.Utils;
 
 import java.util.Map;
 
+import storm.elasticity.bolt.TestBolt;
+import storm.elasticity.spout.TestSpout;
+
 /**
  * This is a basic example of a Storm topology.
  */
-public class ExclamationTopology {
-
-  public static class ExclamationBolt extends BaseRichBolt {
-    OutputCollector _collector;
-
-    @Override
-    public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
-      _collector = collector;
-    }
-
-    @Override
-    public void execute(Tuple tuple) {
-      _collector.emit(tuple, new Values(tuple.getString(0) + "!!!"));
-      _collector.ack(tuple);
-    }
-
-    @Override
-    public void declareOutputFields(OutputFieldsDeclarer declarer) {
-      declarer.declare(new Fields("word"));
-    }
+public class Test {
 
 
-  }
+	public static void main(String[] args) throws Exception {
+		TopologyBuilder builder = new TopologyBuilder();
 
-  public static void main(String[] args) throws Exception {
-    TopologyBuilder builder = new TopologyBuilder();
+		builder.setSpout("word", new TestSpout(), 1);
+		builder.setBolt("exclaim1", new TestBolt(), 1).shuffleGrouping(
+				"word");
 
-    builder.setSpout("word", new TestWordSpout(), 10);
-    builder.setBolt("exclaim1", new ExclamationBolt(), 3).shuffleGrouping("word");
-    builder.setBolt("exclaim2", new ExclamationBolt(), 2).shuffleGrouping("exclaim1").setNumTasks(4);
+		Config conf = new Config();
+		conf.setDebug(true);
 
-    Config conf = new Config();
-    conf.setDebug(true);
+		conf.setNumWorkers(2);
+		conf.setNumAckers(0);
 
-    if (args != null && args.length > 0) {
-      conf.setNumWorkers(4);
+		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
+				builder.createTopology());
 
-      StormSubmitter.submitTopologyWithProgressBar(args[0], conf, builder.createTopology());
-    }
-    else {
-
-      LocalCluster cluster = new LocalCluster();
-      cluster.submitTopology("test", conf, builder.createTopology());
-      Utils.sleep(10000);
-      cluster.killTopology("test");
-      cluster.shutdown();
-    }
-  }
+	}
 }
