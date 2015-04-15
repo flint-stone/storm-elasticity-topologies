@@ -50,7 +50,7 @@ public class ProcessingTopology {
 
 		conf.setNumAckers(0);
 
-		conf.setNumWorkers(12);
+		conf.setNumWorkers(36);
 
 		StormSubmitter.submitTopologyWithProgressBar(args[0], conf,
 				builder.createTopology());
